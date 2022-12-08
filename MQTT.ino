@@ -61,7 +61,9 @@ void setup()
   connect_to_wifi();  
   connect_to_mqtt();
   delay(3000);
-  get_data_and_publish(); 
+  get_data_and_publish();
+  disconnect_wifi_MQTT();
+  sleepy();
 }
 void loop()
 {  
@@ -76,9 +78,11 @@ void sleepy(){
   delay(2500);
   esp_deep_sleep_start();
 }
-void disconnect_wifi(){
+void disconnect_wifi_MQTT(){
   
       WiFi.disconnect();
+      delay(1000);
+      client.disconnect();
   
 }
 void get_data_and_publish()
